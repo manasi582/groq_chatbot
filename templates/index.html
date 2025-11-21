@@ -1,0 +1,47 @@
+
+<!-- templates/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Groq Chatbot — Web UI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+    <div class="app">
+        <header class="topbar">
+            <h1>💬 Groq Chatbot</h1>
+            <div class="controls">
+                <button id="toggleTheme" title="Toggle dark/light">🌙</button>
+            </div>
+        </header>
+
+        <main class="chat-frame">
+            <div id="chat" class="chat"></div>
+        </main>
+
+        <footer class="composer">
+            <textarea id="input" placeholder="Type a message — press Enter to send, Shift+Enter for newline"></textarea>
+            <div class="composer-actions">
+                <button id="sendBtn" title="Send">➤</button>
+            </div>
+        </footer>
+    </div>
+
+    <template id="msgTpl">
+        <div class="message">
+            <div class="meta">
+                <span class="who"></span>
+                <span class="ts"></span>
+                <button class="copyBtn" title="Copy">📋</button>
+            </div>
+            <div class="content"></div>
+        </div>
+    </template>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
+
