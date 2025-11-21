@@ -97,7 +97,8 @@ async function sendMessage(){
 }
 
 // Send button event
-sendBtn.addEventListener("click", sendMessage);
+sendBtn.addEventListener("click", sendMessageStream);
+
 
 // Enter to send, Shift+Enter for newline
 input.addEventListener("keydown", (e) => {
@@ -117,3 +118,34 @@ toggleTheme && toggleTheme.addEventListener("click", () => {
   document.body.classList.toggle("light");
   toggleTheme.innerText = document.body.classList.contains("light") ? "🌞" : "🌙";
 });
+
+async function sendMessageStream() {
+  const text = input.value.trim();
+  if (!text) return;
+  addMessage(text, "user");
+  input.value = "";
+
+  showTyping();
+
+  const res = await fetch("/ask_stream", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ message: text })
+  });
+
+  removeTyping();
+  const reader = res.body.getReader();
+
+  let botText = "";
+  addMessage("", "bot");  // create empty bubble
+  const lastMsg = chat.lastChild.querySelector(".content");
+
+  while (true) {
+    const { value, done } = await reader.read();
+    if (done) break;
+    const chunk = new TextDecoder().decode(value);
+    botText += chunk;
+    lastMsg.innerText = botText;
+    chat.scrollTop = chat.scrollHeight;
+  }
+}
