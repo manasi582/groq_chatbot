@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from groq import Groq
 
 # Load .env securely
-load_dotenv(dotenv_path="/Users/manasiashokpatil/Desktop/projects/chatbot_project/.env")
+load_dotenv()
 
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
