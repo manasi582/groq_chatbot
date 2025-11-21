@@ -117,24 +117,3 @@ toggleTheme && toggleTheme.addEventListener("click", () => {
   document.body.classList.toggle("light");
   toggleTheme.innerText = document.body.classList.contains("light") ? "🌞" : "🌙";
 });
-const themeToggle = document.getElementById("themeToggle");
-const body = document.body;
-
-// 1️⃣ Load saved theme
-if (localStorage.getItem("theme") === "dark") {
-    body.classList.replace("light", "dark");
-    themeToggle.textContent = "☀️ Light";
-}
-
-// 2️⃣ Toggle theme on button click
-themeToggle.addEventListener("click", () => {
-    if (body.classList.contains("light")) {
-        body.classList.replace("light", "dark");
-        themeToggle.textContent = "☀️ Light";
-        localStorage.setItem("theme", "dark");
-    } else {
-        body.classList.replace("dark", "light");
-        themeToggle.textContent = "🌙 Dark";
-        localStorage.setItem("theme", "light");
-    }
-});
